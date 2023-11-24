@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .add-item-btn {
+            background-color: #008CBA;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        .add-item-btn:hover {
+            background-color: #005682;
+        }
+    </style>
+</head>
+<body>
+    <form action="/generate_invoice" method="post">
+        <h1>Invoice Generator</h1>
+        
+        <label for="client_name">Client Name:</label>
+        <input type="text" name="client_name" required>
+
+        <table>
+            <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+            <tr>
+                <td><input type="text" name="item" required></td>
+                <td><input type="number" name="quantity" required></td>
+                <td><input type="number" name="price" step="0.01" required></td>
+            </tr>
+        </table>
+
+        <button type="button" class="add-item-btn" onclick="addRow()">Add Item</button>
+
+        <input type="submit" value="Generate Invoice">
+    </form>
+
+    <script>
+        function addRow() {
+            var table = document.querySelector('table');
+            var row = table.insertRow(table.rows.length - 1);
+
+            var itemCell = row.insertCell(0);
+            var quantityCell = row.insertCell(1);
+            var priceCell = row.insertCell(2);
+
+            itemCell.innerHTML = '<input type="text" name="item" required>';
+            quantityCell.innerHTML = '<input type="number" name="quantity" required>';
+            priceCell.innerHTML = '<input type="number" name="price" step="0.01" required>';
+        }
+    </script>
+</body>
+</html>
